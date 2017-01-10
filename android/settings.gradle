@@ -1,0 +1,3 @@
+rootProject.name = 'TraderApp'
+
+include ':app'

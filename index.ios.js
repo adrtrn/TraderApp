@@ -5,12 +5,14 @@ import {
   Text,
   View
 } from 'react-native';
-import AppNavigator from 'appNavigator';
+import AppNavigator from './appNavigator';
 
 export default class TraderApp extends Component {
   render() {
     return (
-      <AppNavigator/>
+      <AppNavigator
+        initialRoute={{ident: "Search"}} 
+      />
     );
   }
 }

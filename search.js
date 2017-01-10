@@ -21,30 +21,29 @@ class Search extends Component {
     var lat = this.state.position.coords.latitude
     var lng = this.state.position.coords.longitude
     var latlng = "ll=" + String(lat) + "," + String(lng)
-    var consumerKey = "******"
-    var consumerSecret = "******"
+    var consumerKey = "0ppYSN2T11ePY4JP7L85hJWm56mLeSIa"
+    var consumerSecret = "TQGz4SsrAGovBavx"
 
     oauth = new OAuthSimple(consumerKey)
     request = oauth.sign({
       action: "GET",
-      path: " ****** ",
-      parameters: {classificationName: '******', dmaId: '******'}, 
+      path: "https://app.ticketmaster.com/discovery/v2/events.json?",
+      parameters: {classificationName: 'music', dmaId: '324'}, 
       signatures: {api_key: consumerKey, shared_secret: consumerSecret},
     })
 
     var nav = this.props.navigator
 
-    fetch(' ').then(function(response){
+    fetch('https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
       return response.json()
     }).then(function(data){
       nav.push({
-        ident: "Results",
+        ident: "Result",
         data: data,
       })
     }).catch(function(error){
       console.log("Error:", error)
     })
-
   }
 
   render() {
@@ -94,4 +93,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = Search
+module.exports = Search;

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Navigator } from 'react-native';
+import Search from './search';
+import Result from './result';
 
 class AppNavigator extends Component {
 
@@ -13,7 +15,7 @@ class AppNavigator extends Component {
             {...globalNavProps} />  
         )
 
-      case 'Results':
+      case 'Result':
         return (
           <Result
             {...globalNavProps} 
@@ -23,14 +25,14 @@ class AppNavigator extends Component {
   }
 
   render() {
-    return {
+    return (
       <Navigator 
         initialRoute={this.props.initialRoute}
         renderScene={this.renderScene}
         configureScene={(route) => Navigator.SceneConfigs.FloatFromRight } />
-    }
+    )
   }
 
 }
 
-module.exports = AppNavigator
+module.exports = AppNavigator;

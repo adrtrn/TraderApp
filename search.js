@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, ActivityIndicator, Text, View, TextInput, TouchableHighlight} from 'react-native';
+import {StyleSheet, ActivityIndicator, Text, View, Image, TextInput, TouchableHighlight} from 'react-native';
 import OAuthSimple from 'oauthsimple'
 
 class Search extends Component {
@@ -39,7 +39,7 @@ class Search extends Component {
     var now = new Date();
     var today = "startDateTime=" + dateFormat(now, "isoDateTime").slice(0, -5) + 'Z';
 
-    fetch('https://app.ticketmaster.com/discovery/v2/events.json?'+today+'&keyword='+this.state.searchString+'&dmaId=324&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
+    fetch('https://app.ticketmaster.com/discovery/v2/events.json?'+today+'&keyword='+this.state.searchString+'&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
       return response.json()
     }).then(function(data){
       nav.push({
@@ -82,7 +82,11 @@ class Search extends Component {
         <TouchableHighlight
           style={styles.button}
           onPress={this.fetchData.bind(this)}>
-          <Text style={{fontSize: 16, color: '#fff'}}>SEARCH</Text>
+          <Image
+            style={styles.search}
+            source={require('./assets/search.png')}
+    
+          />
         </TouchableHighlight>
         
       </View>
@@ -102,17 +106,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 7,
     padding: 5, 
-    backgroundColor: '#CBE32D',
+    backgroundColor: 'transparent',
     alignItems: 'center',
     marginBottom: 150,
+    left: 150,
+    bottom: 46,
+    right: 3,
+  },
+  search: {
+    opacity: 0.4,
+    backgroundColor: 'transparent',
   },
   welcome: {
     fontSize: 40,
-    fontFamily: 'helvetica',
-    fontWeight: '200',
+    fontFamily: 'helvetica neue',
+    letterSpacing: 2,
+    fontWeight: '400',
     textAlign: 'center',
     margin: 10,
-    color: '#303030'
+    color: '#7E8F7C'
   },
   spinner: {
     height: 20,
@@ -124,11 +136,11 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginBottom: 10,
     fontSize: 18,
-    borderWidth: 1,
+    borderWidth: .7,
     borderColor: '#909090',
-    borderRadius: 8,
+    borderRadius: 6,
     color: '#48BBEC',
-    textAlign: 'center',
+    textAlign: 'left',
 
 }
 });

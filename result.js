@@ -51,7 +51,7 @@ class Result extends Component {
           />
           <Text style={styles.title}> {result.name} </Text>
           <Text style={styles.description}> {result.dates.start.dateTime.slice(5,-10).replace(/-/,'/')} </Text>
-          <Text style={styles.description}> @ {result._embedded.venues[0].name}, {result._embedded.venues[0].city.name} 
+          <Text style={styles.description}>  {result._embedded.venues[0].name}, {result._embedded.venues[0].city.name} 
           </Text>
        </View>
 
@@ -107,10 +107,10 @@ const styles = StyleSheet.create({
   },
   thumb: {
     opacity: 0.8,
-    width: 150,
+    width: 300,
     height: 150,
     borderRadius: 17,
-    marginLeft: 120
+    marginLeft: 30
   },  
 });
 

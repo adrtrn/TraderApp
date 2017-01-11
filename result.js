@@ -7,8 +7,7 @@ class Result extends Component {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
     this.state = {
-      results: ds.cloneWithRows(props.data['_embedded']['events'].map(function(x){ return x; }))
-
+      results: ds.cloneWithRows(props.data['_embedded']['events'].map(function(x){ return x; })),
     }
   }
 
@@ -32,7 +31,7 @@ class Result extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Events</Text>
+        <Text style={styles.header}>Trader</Text>
         <ListView
           style={styles.list}
           dataSource={this.state.results}
@@ -43,15 +42,17 @@ class Result extends Component {
   }
 
   renderResult(result) {
-    console.log(result.images[4]);
     return (
       <TouchableOpacity style={styles.resultRow}>
         <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-between', marginTop: 4,}}>
           <Image 
             style={styles.thumb}
-            source={{ uri: result.images[7]['url'] }}
+            source={{ uri: result.images[2]['url'] }}
           />
           <Text style={styles.title}> {result.name} </Text>
+          <Text style={styles.description}> {result.dates.start.dateTime.slice(5,-10).replace(/-/,'/')} </Text>
+          <Text style={styles.description}> @ {result._embedded.venues[0].name}, {result._embedded.venues[0].city.name} 
+          </Text>
        </View>
 
       </TouchableOpacity>
@@ -64,6 +65,8 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
     padding: 7,
+    justifyContent: 'center',
+    alignItems: 'center',  
   },  
   header:{
     textAlign: 'center',
@@ -87,21 +90,27 @@ const styles = StyleSheet.create({
   },
   resultRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
+    justifyContent: 'center',
+    alignItems: 'center',  
     marginTop: 10
   },
   title: {
     justifyContent: 'flex-end',    
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
-    color: '#505050'
+    color: '#303030'
+  },
+  description: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: '#808080'
   },
   thumb: {
-    width: 70,
-    height: 70,
-    borderRadius: 20,
-    marginLeft: 153
+    opacity: 0.8,
+    width: 150,
+    height: 150,
+    borderRadius: 17,
+    marginLeft: 120
   },  
 });
 

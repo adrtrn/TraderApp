@@ -4,7 +4,9 @@ import OAuthSimple from 'oauthsimple'
 
 class Search extends Component {
   state = {
-    position: 'unknown'
+    position: 'unknown',
+    searchString: '',
+    isLoading: false
   };
 
   componentDidMount() {
@@ -28,7 +30,7 @@ class Search extends Component {
     request = oauth.sign({
       action: "GET",
       path: "https://app.ticketmaster.com/discovery/v2/events.json?",
-      parameters: {classificationName: 'music', dmaId: '27', latlong: latlong}, 
+      parameters: {classificationName: 'music', dmaId: '324', latlong: latlong}, 
       signatures: {api_key: consumerKey, shared_secret: consumerSecret},
     })
 
@@ -37,7 +39,7 @@ class Search extends Component {
     var now = new Date();
     var today = "startDateTime=" + dateFormat(now, "isoDateTime").slice(0, -5) + 'Z';
 
-    fetch('https://app.ticketmaster.com/discovery/v2/events.json?'+today+'&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
+    fetch('https://app.ticketmaster.com/discovery/v2/events.json?'+today+'&keyword='+this.state.searchString+'&dmaId=324&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
       return response.json()
     }).then(function(data){
       nav.push({
@@ -49,17 +51,34 @@ class Search extends Component {
     })
   }
 
+  onSearchTextChanged(event) {
+    this.setState({ searchString: event.nativeEvent.text })
+  }
+  _executeQuery(query) {
+    console.log(query);
+    this.setState({ isLoading: true });
+  }
+  onSearchPressed() {
+    var query = urlForQueryAndPage('place_name', this.state.searchString, 1);
+    this._executeQuery(query);
+  }
   render() {
+    var spinner = this.state.isLoading ?
+      ( <ActivityIndicator
+          size='large'/> ) :
+      ( <View/>);
 
     return (
       <View style={styles.container}>
-
         <Text style={styles.welcome}>
           TRADER
         </Text>
         <TextInput
           style={styles.searchInput}
+          value={this.state.searchString}
+          onChange={this.onSearchTextChanged.bind(this)}
           placeholder='Search by Event Name or Location'/>
+          {spinner}
         <TouchableHighlight
           style={styles.button}
           onPress={this.fetchData.bind(this)}>

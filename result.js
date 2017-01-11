@@ -7,8 +7,7 @@ class Result extends Component {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
     this.state = {
-      results: ds.cloneWithRows(props.data['_embedded']['events'].map(function(x){ return x; }))
-
+      results: ds.cloneWithRows(props.data['_embedded']['events'].map(function(x){ return x; })),
     }
   }
 
@@ -32,8 +31,9 @@ class Result extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style= {styles.header}> Events</Text>
+        <Text style={styles.header}>Trader</Text>
         <ListView
+          style={styles.list}
           dataSource={this.state.results}
           renderRow={(result) => { return this.renderResult(result) }} 
           renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}/>
@@ -42,15 +42,17 @@ class Result extends Component {
   }
 
   renderResult(result) {
-    console.log(result.images[4]);
     return (
       <TouchableOpacity style={styles.resultRow}>
         <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-between', marginTop: 4,}}>
           <Image 
             style={styles.thumb}
-            source={{ uri: result.images[7]['url'] }}
+            source={{ uri: result.images[2]['url'] }}
           />
           <Text style={styles.title}> {result.name} </Text>
+          <Text style={styles.description}> {result.dates.start.dateTime.slice(5,-10).replace(/-/,'/')} </Text>
+          <Text style={styles.description}>  {result._embedded.venues[0].name}, {result._embedded.venues[0].city.name} 
+          </Text>
        </View>
 
       </TouchableOpacity>
@@ -62,23 +64,24 @@ class Result extends Component {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    padding: 7
+    padding: 7,
+    justifyContent: 'center',
+    alignItems: 'center',  
   },  
   header:{
     textAlign: 'center',
-    position: 'relative',
-    top: 18,
-    fontSize: 30,
+    top: 26,
+    fontSize: 26,
     fontWeight: '200',
     backgroundColor: '#A8CD1B',
     color: '#fff'
   },
-  list: {
-    marginTop: 20,
-  },
   container: {
     flex: 1,
-    backgroundColor: '#Fff'
+    backgroundColor: '#F2EFE4'
+  },
+  list: {
+    marginTop: 20
   },
   separator: {
     flex: 1,
@@ -87,23 +90,27 @@ const styles = StyleSheet.create({
   },
   resultRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'flex-start',
-    marginBottom: 10,
-    marginRight: 15,
-    marginTop: 15,
-    marginLeft: 15,
+    justifyContent: 'center',
+    alignItems: 'center',  
+    marginTop: 10
   },
   title: {
     justifyContent: 'flex-end',    
     fontSize: 16,
-    textAlign: 'right',
-    color: '#505050'
+    textAlign: 'center',
+    color: '#303030'
+  },
+  description: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: '#808080'
   },
   thumb: {
-    width: 80,
-    height: 80,
-    borderRadius: 39    
+    opacity: 0.8,
+    width: 300,
+    height: 150,
+    borderRadius: 17,
+    marginLeft: 30
   },  
 });
 

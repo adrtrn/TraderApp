@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet, ActivityIndicator, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, ActivityIndicator, Text, View, Image, TextInput, TouchableHighlight} from 'react-native';
 import OAuthSimple from 'oauthsimple'
 
 class Search extends Component {
   state = {
-    position: 'unknown'
+    position: 'unknown',
+    searchString: '',
+    isLoading: false
   };
 
   componentDidMount() {
@@ -20,7 +22,7 @@ class Search extends Component {
   fetchData() {
     var lat = this.state.position.coords.latitude
     var lng = this.state.position.coords.longitude
-    var latlng = "ll=" + String(lat) + "," + String(lng)
+    var latlong = "latlong=" + String(lat) + "," + String(lng)
     var consumerKey = "0ppYSN2T11ePY4JP7L85hJWm56mLeSIa"
     var consumerSecret = "TQGz4SsrAGovBavx"
 
@@ -28,13 +30,16 @@ class Search extends Component {
     request = oauth.sign({
       action: "GET",
       path: "https://app.ticketmaster.com/discovery/v2/events.json?",
-      parameters: {classificationName: 'music', dmaId: '324'}, 
+      parameters: {classificationName: 'music', dmaId: '324', latlong: latlong}, 
       signatures: {api_key: consumerKey, shared_secret: consumerSecret},
     })
 
     var nav = this.props.navigator
+    var dateFormat = require('dateformat');
+    var now = new Date();
+    var today = "startDateTime=" + dateFormat(now, "isoDateTime").slice(0, -5) + 'Z';
 
-    fetch('https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
+    fetch('https://app.ticketmaster.com/discovery/v2/events.json?'+today+'&keyword='+this.state.searchString+'&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
       return response.json()
     }).then(function(data){
       nav.push({
@@ -46,26 +51,43 @@ class Search extends Component {
     })
   }
 
+  onSearchTextChanged(event) {
+    this.setState({ searchString: event.nativeEvent.text })
+  }
+  _executeQuery(query) {
+    console.log(query);
+    this.setState({ isLoading: true });
+  }
+  onSearchPressed() {
+    var query = urlForQueryAndPage('place_name', this.state.searchString, 1);
+    this._executeQuery(query);
+  }
   render() {
-    var spinnerAnimation = <ActivityIndicator
-                              animating={this.state.isLoading}
-                              color='black'
-                              size='large' style={styles.spinner}>
-                            </ActivityIndicator>
-    var showSpinner = (this.state.isLoading ? spinnerAnimation : console.log('Fail'))    
+    var spinner = this.state.isLoading ?
+      ( <ActivityIndicator
+          size='large'/> ) :
+      ( <View/>);
 
     return (
       <View style={styles.container}>
-
         <Text style={styles.welcome}>
           TRADER
         </Text>
-        {showSpinner}
-        <TouchableOpacity
-          style={{borderRadius: 7,padding: 10, backgroundColor: '#CBE32D'}}
+        <TextInput
+          style={styles.searchInput}
+          value={this.state.searchString}
+          onChange={this.onSearchTextChanged.bind(this)}
+          placeholder='Search by Event Name or Location'/>
+          {spinner}
+        <TouchableHighlight
+          style={styles.button}
           onPress={this.fetchData.bind(this)}>
-          <Text style={{fontSize: 16, color: '#fff'}}>GO</Text>
-        </TouchableOpacity>
+          <Image
+            style={styles.search}
+            source={require('./assets/search.png')}
+    
+          />
+        </TouchableHighlight>
         
       </View>
     );
@@ -77,20 +99,50 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#F2EFE4',
+
+  },
+  button: {
+    flexDirection: 'row',
+    borderRadius: 7,
+    padding: 5, 
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    marginBottom: 150,
+    left: 150,
+    bottom: 46,
+    right: 3,
+  },
+  search: {
+    opacity: 0.4,
+    backgroundColor: 'transparent',
   },
   welcome: {
     fontSize: 40,
-    fontFamily: 'helvetica',
-    fontWeight: '200',
+    fontFamily: 'helvetica neue',
+    letterSpacing: 2,
+    fontWeight: '400',
     textAlign: 'center',
     margin: 10,
-    marginBottom: 50,
-    color: '#303030'
+    color: '#7E8F7C'
   },
   spinner: {
     height: 20,
-  }
+  },
+  searchInput: {
+    height: 40,
+    padding: 4,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 10,
+    fontSize: 18,
+    borderWidth: .7,
+    borderColor: '#909090',
+    borderRadius: 6,
+    color: '#48BBEC',
+    textAlign: 'left',
+
+}
 });
 
 module.exports = Search;

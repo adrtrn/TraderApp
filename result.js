@@ -32,8 +32,9 @@ class Result extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style= {styles.header}> Events</Text>
+        <Text style={styles.header}>Events</Text>
         <ListView
+          style={styles.list}
           dataSource={this.state.results}
           renderRow={(result) => { return this.renderResult(result) }} 
           renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}/>
@@ -62,23 +63,22 @@ class Result extends Component {
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    padding: 7
+    padding: 7,
   },  
   header:{
     textAlign: 'center',
-    position: 'relative',
-    top: 18,
-    fontSize: 30,
+    top: 26,
+    fontSize: 26,
     fontWeight: '200',
     backgroundColor: '#A8CD1B',
     color: '#fff'
   },
-  list: {
-    marginTop: 20,
-  },
   container: {
     flex: 1,
-    backgroundColor: '#Fff'
+    backgroundColor: '#F2EFE4'
+  },
+  list: {
+    marginTop: 20
   },
   separator: {
     flex: 1,
@@ -89,21 +89,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-start',
-    marginBottom: 10,
-    marginRight: 15,
-    marginTop: 15,
-    marginLeft: 15,
+    marginTop: 10
   },
   title: {
     justifyContent: 'flex-end',    
-    fontSize: 16,
-    textAlign: 'right',
+    fontSize: 14,
+    textAlign: 'center',
     color: '#505050'
   },
   thumb: {
-    width: 80,
-    height: 80,
-    borderRadius: 39    
+    width: 70,
+    height: 70,
+    borderRadius: 20,
+    marginLeft: 153
   },  
 });
 

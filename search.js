@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, ActivityIndicator, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, ActivityIndicator, Text, View, TextInput, TouchableHighlight} from 'react-native';
 import OAuthSimple from 'oauthsimple'
 
 class Search extends Component {
@@ -20,7 +20,7 @@ class Search extends Component {
   fetchData() {
     var lat = this.state.position.coords.latitude
     var lng = this.state.position.coords.longitude
-    var latlng = "ll=" + String(lat) + "," + String(lng)
+    var latlong = "latlong=" + String(lat) + "," + String(lng)
     var consumerKey = "0ppYSN2T11ePY4JP7L85hJWm56mLeSIa"
     var consumerSecret = "TQGz4SsrAGovBavx"
 
@@ -28,13 +28,16 @@ class Search extends Component {
     request = oauth.sign({
       action: "GET",
       path: "https://app.ticketmaster.com/discovery/v2/events.json?",
-      parameters: {classificationName: 'music', dmaId: '324'}, 
+      parameters: {classificationName: 'music', dmaId: '27', latlong: latlong}, 
       signatures: {api_key: consumerKey, shared_secret: consumerSecret},
     })
 
     var nav = this.props.navigator
+    var dateFormat = require('dateformat');
+    var now = new Date();
+    var today = "startDateTime=" + dateFormat(now, "isoDateTime").slice(0, -5) + 'Z';
 
-    fetch('https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
+    fetch('https://app.ticketmaster.com/discovery/v2/events.json?'+today+'&apikey=0ppYSN2T11ePY4JP7L85hJWm56mLeSIa').then(function(response){
       return response.json()
     }).then(function(data){
       nav.push({
@@ -47,12 +50,6 @@ class Search extends Component {
   }
 
   render() {
-    var spinnerAnimation = <ActivityIndicator
-                              animating={this.state.isLoading}
-                              color='black'
-                              size='large' style={styles.spinner}>
-                            </ActivityIndicator>
-    var showSpinner = (this.state.isLoading ? spinnerAnimation : console.log('Fail'))    
 
     return (
       <View style={styles.container}>
@@ -60,12 +57,14 @@ class Search extends Component {
         <Text style={styles.welcome}>
           TRADER
         </Text>
-        {showSpinner}
-        <TouchableOpacity
-          style={{borderRadius: 7,padding: 10, backgroundColor: '#CBE32D'}}
+        <TextInput
+          style={styles.searchInput}
+          placeholder='Search by Event Name or Location'/>
+        <TouchableHighlight
+          style={styles.button}
           onPress={this.fetchData.bind(this)}>
-          <Text style={{fontSize: 16, color: '#fff'}}>GO</Text>
-        </TouchableOpacity>
+          <Text style={{fontSize: 16, color: '#fff'}}>SEARCH</Text>
+        </TouchableHighlight>
         
       </View>
     );
@@ -77,7 +76,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#F2EFE4',
+
+  },
+  button: {
+    flexDirection: 'row',
+    borderRadius: 7,
+    padding: 5, 
+    backgroundColor: '#CBE32D',
+    alignItems: 'center',
+    marginBottom: 150,
   },
   welcome: {
     fontSize: 40,
@@ -85,12 +93,25 @@ const styles = StyleSheet.create({
     fontWeight: '200',
     textAlign: 'center',
     margin: 10,
-    marginBottom: 50,
     color: '#303030'
   },
   spinner: {
     height: 20,
-  }
+  },
+  searchInput: {
+    height: 40,
+    padding: 4,
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 10,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#909090',
+    borderRadius: 8,
+    color: '#48BBEC',
+    textAlign: 'center',
+
+}
 });
 
 module.exports = Search;

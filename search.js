@@ -43,7 +43,7 @@ class Search extends Component {
       return response.json()
     }).then(function(data){
       nav.push({
-        ident: "Result",
+        title: "Result",
         data: data,
       })
     }).catch(function(error){
@@ -70,9 +70,7 @@ class Search extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          TRADER
-        </Text>
+
         <TextInput
           style={styles.searchInput}
           value={this.state.searchString}
@@ -81,6 +79,7 @@ class Search extends Component {
           {spinner}
         <TouchableHighlight
           style={styles.button}
+          underlayColor="transparent"
           onPress={this.fetchData.bind(this)}>
           <Image
             style={styles.search}
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginBottom: 10,
     fontSize: 18,
-    borderWidth: .7,
+    borderWidth: .8,
     borderColor: '#909090',
     borderRadius: 6,
     color: '#48BBEC',
@@ -145,4 +144,4 @@ const styles = StyleSheet.create({
 }
 });
 
-module.exports = Search;
+export default Search;

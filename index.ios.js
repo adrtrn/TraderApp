@@ -7,12 +7,11 @@ import {
 } from 'react-native';
 import AppNavigator from './appNavigator';
 
-export default class TraderApp extends Component {
+class TraderApp extends Component {
   render() {
     return (
       <AppNavigator
-        initialRoute={{ident: "Search"}} 
-      />
+        initialRoute={{title: "Search"}} />
     );
   }
 }
@@ -28,11 +27,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
 

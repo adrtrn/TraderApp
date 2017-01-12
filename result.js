@@ -1,37 +1,30 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, RefreshControl, ActivityIndicator, ListView, Linking, TouchableOpacity} from 'react-native';
+import EventView from './eventView';
 
 class Result extends Component {
 
   constructor(props) {
     super(props)
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.url != r2.url})
     this.state = {
       results: ds.cloneWithRows(props.data['_embedded']['events'].map(function(x){ return x; })),
     }
   }
 
-  renderRow(rowData, sectionID, rowID) {
-    return (
-      <TouchableHighlight onPress={() => this.rowPressed(rowData.url)}
-          underlayColor='#dddddd'>
-        <View>
-          <View style={styles.rowContainer}>
-            <View  style={styles.textContainer}>
-              <Text style={styles.title}
-                    numberOfLines={1}>{rowData.title}</Text>
-            </View>
-          </View>
-          <View style={styles.separator}/>
-        </View>
-      </TouchableHighlight>
-    );
-  }  
+  rowPressed(eventURL) {
+    var event = this.props.data['_embedded']['events'].map(function(x){ return x; }).filter(prop => prop.url === eventURL)[0];
+
+    this.props.navigator.push({
+      title: "Event",
+      component: EventView,
+      event: event
+    });
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Trader</Text>
         <ListView
           style={styles.list}
           dataSource={this.state.results}
@@ -43,7 +36,8 @@ class Result extends Component {
 
   renderResult(result) {
     return (
-      <TouchableOpacity style={styles.resultRow}>
+      <TouchableOpacity onPress={() => this.rowPressed(result.url)}
+        style={styles.resultRow}>
         <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-between', marginTop: 4,}}>
           <Image 
             style={styles.thumb}

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Search from './search';
 import Result from './result';
+import EventView from './eventView';
 
 
 var NavigationBarRouteMapper = {
@@ -80,6 +81,12 @@ class AppNavigator extends Component {
           <Result
             navigator={navigator} 
             data = {route.data} />
+        )
+    } else if (route.title === 'Event') {
+        return (
+          <EventView
+            navigator={navigator} 
+            eventdata = {route.event} />        
         )
     }
   }

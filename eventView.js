@@ -38,7 +38,6 @@ class EventView extends Component {
       <TouchableOpacity>
         <Text style={styles.forumbutton}> SHOW POSTS </Text>
       </TouchableOpacity>
-        <Login/>
       </View>
     );
   }

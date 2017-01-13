@@ -8,14 +8,23 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
+import Login from './fblogin';
 
 class EventView extends Component {
 
   render() {
   var eventDetails = this.props.eventdata
+  var today = new Date();
 
-  if (eventDetails.dates.start)
 
+  /* LOGIC GOES HERE FOR LINK TO FORUM IF THE EVENT DATE IS CURRENT */
+
+  /*if (eventDetails.dates.start === today) {
+    return button;
+  } else {
+    return "The event hasn't started or is already over.";
+  }
+  */
 
 
     return (
@@ -29,7 +38,7 @@ class EventView extends Component {
       <TouchableOpacity>
         <Text style={styles.forumbutton}> SHOW POSTS </Text>
       </TouchableOpacity>
-
+        <Login/>
       </View>
     );
   }

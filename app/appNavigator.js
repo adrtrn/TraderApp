@@ -30,18 +30,6 @@ var NavigationBarRouteMapper = {
           <Image source={require('.././assets/back.png')}/>
         </View>
         </TouchableHighlight>
-    )} else {
-      return (
-        <TouchableHighlight 
-          style={styles.rightNavButton}
-          onPress={() => { navigator.push({
-              title: 'Profile',
-            })
-          }}>
-          <View>
-          <Image source={require('.././assets/back.png')}/>
-        </View>
-        </TouchableHighlight>
     )} 
   },
   Title(route, navigator, index, navState) {

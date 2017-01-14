@@ -33,14 +33,23 @@ class EventView extends Component {
             source={{uri: eventDetails.images[3].url}} /> 
         <Text style={styles.description}>{eventDetails.name}</Text>
         <View style={{flexDirection: 'row'}}> 
-          <View style={styles.need}>
-            <Image source={require('.././assets/need.png')}/>
-            <Text style={styles.buttontext}> Need</Text>
-          </View>
-          <View style={styles.trade}>
-            <Image  source={require('.././assets/trade.png')}/>
-          <Text style={styles.buttontext}>Trade</Text>
-          </View>
+          <TouchableOpacity
+            style={styles.addpost}>
+             <Image
+            style={styles.search}
+            source={require('.././assets/add.png')}
+          />            
+          <Text style={styles.buttontext}> CREATE </Text>
+
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.listall}>
+             <Image
+            style={styles.search}
+            source={require('.././assets/listall.png')}
+          />                     
+          <Text style={styles.buttontext}> VIEW ALL </Text>
+          </TouchableOpacity>
         </View>        
         <EventListings/>
 
@@ -59,13 +68,23 @@ const styles = StyleSheet.create({
     left: 50,
   },
   buttontext: {
-    color: '#505050', 
+    textAlign: 'center',
+    right: 7,
+    color: '#686868', 
     fontFamily:'helvetica', 
     fontWeight: '400'
   },
   trade: {
     bottom: 15,
     left: 240
+  },
+  listall: {
+    top: 2,
+    left: 200
+  },
+  addpost: {
+    top: 3,
+    left: 90
   },
   image: {
     width: 380,
@@ -85,8 +104,8 @@ const styles = StyleSheet.create({
   },
   description: {
     backgroundColor: 'transparent',
-    fontSize: 22,
-    margin: 5,
+    fontSize: 20,
+    margin: 3,
     color: '#585858',
     textAlign: 'center',
     fontFamily: 'Helvetica',

@@ -26,7 +26,7 @@ var NavigationBarRouteMapper = {
             })
           }>
           <View>
-          <Image source={require('./assets/back.png')}/>
+          <Image source={require('.././assets/back.png')}/>
         </View>
         </TouchableHighlight>
     )} else {
@@ -38,7 +38,7 @@ var NavigationBarRouteMapper = {
             })
           }}>
           <View>
-          <Image source={require('./assets/back.png')}/>
+          <Image source={require('.././assets/back.png')}/>
         </View>
         </TouchableHighlight>
     )} 
@@ -61,7 +61,7 @@ var NavigationBarRouteMapper = {
             })
           }}>
           <View>
-          <Image source={require('./assets/user.png')}/>
+          <Image source={require('.././assets/user.png')}/>
         </View>
         </TouchableHighlight>
       );

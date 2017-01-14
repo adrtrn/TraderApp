@@ -9,6 +9,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import Login from './fblogin';
+import EventListings from './eventlistings';
+
 
 class EventView extends Component {
 
@@ -25,19 +27,18 @@ class EventView extends Component {
     return "The event hasn't started or is already over.";
   }
   */
-
-
     return (
       <View style={styles.container}>
         <Image style={styles.image}
             source={{uri: eventDetails.images[3].url}} /> 
         <Text style={styles.description}>{eventDetails.name}</Text>
-        <Text style={styles.description}>{eventDetails.dates.start.dateTime.slice(5,-10).replace(/-/,'/')}</Text>
+        <View style={{flexDirection: 'row'}}> 
+          <Text> Meow </Text>
+          <Text> Meow </Text>
+          <Text> Meow </Text>
+        </View>        
+        <EventListings/>
 
-
-      <TouchableOpacity>
-        <Text style={styles.forumbutton}> SHOW POSTS </Text>
-      </TouchableOpacity>
       </View>
     );
   }
@@ -45,24 +46,34 @@ class EventView extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#7E8F7C'
   },
   image: {
     width: 380,
-    height: 300
+    height: 300,
+    opacity: 0.6
   },
   title: {
     fontSize: 14,
     margin: 5,
     color: '#656565',
-
   },
-  description: {
-    fontSize: 18,
-    margin: 5,
-    color: '#656565',
+  date: {
+    fontSize: 12,
+    color: '#FFF',
     textAlign: 'center',
     fontFamily: 'Helvetica',
-    fontWeight: '400'  
+  },
+  description: {
+    backgroundColor: 'transparent',
+    fontSize: 22,
+    margin: 5,
+    color: '#FFF',
+    textAlign: 'center',
+    fontFamily: 'Helvetica',
+    fontWeight: '400',
+    bottom: 55,
   },
   forumbutton: {
     color: 'green',

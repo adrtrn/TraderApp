@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image, RefreshControl, ActivityIndicator, ListV
 var sampledata = ['ITEM #1','ITEM #2','ITEM #3','ITEM #4','ITEM #5',]
 
 
-class Userlist extends Component {
+class Userlistings extends Component {
 
 
   constructor(props) {
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   },  
 });
 
-export default Userlist;
+export default Userlistings;

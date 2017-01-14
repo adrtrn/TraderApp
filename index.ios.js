@@ -5,7 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
-import AppNavigator from './appNavigator';
+import AppNavigator from './app/appNavigator';
 
 class TraderApp extends Component {
   render() {

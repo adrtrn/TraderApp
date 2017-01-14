@@ -7,13 +7,15 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import Userlist from './userlist';
+import Userlistings from './userlist';
+import PusherChat from '.././src/pusherchat'
+
 
 class Profile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.userimage} source={require('./assets/cat.jpeg')}/>
+        <Image style={styles.userimage} source={require('.././assets/cat.jpeg')}/>
         <Text style={styles.username}>
           Grumpy Cat
         </Text>
@@ -21,7 +23,7 @@ class Profile extends Component {
           <Text style={styles.post}>
             RECENT POSTS
           </Text>
-          <Userlist/>
+          <PusherChat/>
         </View>
       </View>
     );

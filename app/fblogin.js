@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
+/*
 const FBSDK = require('react-native-fbsdk');
 const {
   LoginButton,
@@ -40,3 +41,5 @@ class Login extends Component {
 };
 
 export default Login;
+
+*/

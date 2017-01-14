@@ -11,7 +11,7 @@ import {
 import Search from './search';
 import Result from './result';
 import EventView from './eventView';
-
+import Profile from './profile';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
@@ -26,7 +26,7 @@ var NavigationBarRouteMapper = {
             })
           }>
           <View>
-          <Image source={require('./assets/back.png')}/>
+          <Image source={require('.././assets/back.png')}/>
         </View>
         </TouchableHighlight>
     )} else {
@@ -38,7 +38,7 @@ var NavigationBarRouteMapper = {
             })
           }}>
           <View>
-          <Image source={require('./assets/back.png')}/>
+          <Image source={require('.././assets/back.png')}/>
         </View>
         </TouchableHighlight>
     )} 
@@ -61,7 +61,7 @@ var NavigationBarRouteMapper = {
             })
           }}>
           <View>
-          <Image source={require('./assets/user.png')}/>
+          <Image source={require('.././assets/user.png')}/>
         </View>
         </TouchableHighlight>
       );
@@ -88,12 +88,17 @@ class AppNavigator extends Component {
             navigator={navigator} 
             eventdata = {route.event} />        
         )
+    } else if (route.title === 'Profile') {
+        return (
+          <Profile
+            navigator={navigator} />
+        )
     }
   }
 
   render() {
     return (
-      <Navigator 
+      <Navigator
         initialRoute={this.props.initialRoute}
         renderScene={this.renderScene}
         configureScene={(route) => Navigator.SceneConfigs.FloatFromRight } 

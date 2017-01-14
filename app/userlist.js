@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, RefreshControl, ActivityIndicator, ListView, Linking, TouchableOpacity} from 'react-native';
-import EventView from './eventView';
 
-class Result extends Component {
+
+var sampledata = ['ITEM #1','ITEM #2','ITEM #3','ITEM #4','ITEM #5',]
+
+
+class Userlistings extends Component {
+
 
   constructor(props) {
     super(props)
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.url != r2.url})
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
     this.state = {
-      results: ds.cloneWithRows(props.data['_embedded']['events'].map(function(x){ return x; })),
+      userposts: ds.cloneWithRows(sampledata)
     }
-  }
-
-  rowPressed(eventURL) {
-    var event = this.props.data['_embedded']['events'].map(function(x){ return x; }).filter(prop => prop.url === eventURL)[0];
-
-    this.props.navigator.push({
-      title: "Event",
-      component: EventView,
-      event: event
-    });
   }
 
   render() {
@@ -27,7 +21,7 @@ class Result extends Component {
       <View style={styles.container}>
         <ListView
           style={styles.list}
-          dataSource={this.state.results}
+          dataSource={this.state.userposts}
           renderRow={(result) => { return this.renderResult(result) }} 
           renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}/>
       </View>
@@ -36,29 +30,19 @@ class Result extends Component {
 
   renderResult(result) {
     return (
-      <TouchableOpacity onPress={() => this.rowPressed(result.url)}
+      <TouchableOpacity onPress={() => this.rowPressed(result)}
         style={styles.resultRow}>
         <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-between', marginTop: 4,}}>
-          <Image 
-            style={styles.thumb}
-            source={{ uri: result.images[2]['url'] }}
-          />
-          <Text style={styles.title}> {result.name} </Text>
-          <Text style={styles.description}> {result.dates.start.dateTime.slice(5,-10).replace(/-/,'/')} </Text>
-          <Text style={styles.description}>  {result._embedded.venues[0].name}, {result._embedded.venues[0].city.name} 
-          </Text>
+          <Text style={styles.title}> {result} </Text>
        </View>
-
       </TouchableOpacity>
     )
-  }
-
+  }  
 }
 
 const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
-    padding: 7,
     justifyContent: 'center',
     alignItems: 'center',  
   },  
@@ -86,7 +70,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',  
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 10
   },
   title: {
     justifyContent: 'flex-end',    
@@ -108,4 +93,4 @@ const styles = StyleSheet.create({
   },  
 });
 
-export default Result;
+export default Userlistings;

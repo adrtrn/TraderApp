@@ -83,7 +83,7 @@ class Search extends Component {
           onPress={this.fetchData.bind(this)}>
           <Image
             style={styles.search}
-            source={require('./assets/search.png')}
+            source={require('.././assets/search.png')}
     
           />
         </TouchableHighlight>

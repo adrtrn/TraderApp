@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F2EFE4',
   },
   backgroundImage: {
-    resizeMode: 'cover', // or 'stretch'
+    resizeMode: 'cover', 
+    opacity: 1// or 'stretch'
   },
     button: {
     flexDirection: 'row',

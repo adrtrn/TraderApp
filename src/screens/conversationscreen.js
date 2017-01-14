@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { connect } from 'react-redux';
 import { apiSendChat, newMesage } from './../actions/';
+import moment from 'moment';
 
 const { width, height } = Dimensions.get('window');
 
@@ -33,8 +34,9 @@ class ConversationScreen extends Component {
         const {dispatch, Chats} = this.props;
         const chats = Chats;
 
-            this.setState({
-                conversation: this.state.conversation.cloneWithRows(chats)
+
+        this.setState({
+            conversation: this.state.conversation.cloneWithRows(chats)
             })
         this.setState({
             conversation: this.state.conversation.cloneWithRows(chats)

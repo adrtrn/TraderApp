@@ -12,6 +12,7 @@ import Search from './search';
 import Result from './result';
 import EventView from './eventView';
 import Profile from './profile';
+import PusherChat from '.././src/pusherchat';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
@@ -34,7 +35,7 @@ var NavigationBarRouteMapper = {
         <TouchableHighlight 
           style={styles.rightNavButton}
           onPress={() => { navigator.push({
-              title: 'Search',
+              title: 'Profile',
             })
           }}>
           <View>
@@ -51,11 +52,22 @@ var NavigationBarRouteMapper = {
   },
   RightButton(route, navigator, index, navState) {
     if (route.title === 'Profile') {
-      return null;
-    } else {
       return (
         <TouchableHighlight 
           style={styles.rightNavButton}
+          onPress={() => { navigator.push({
+              title: 'Chat',
+            })
+          }}>
+          <View>
+          <Image source={require('.././assets/chat.png')}/>
+        </View>
+        </TouchableHighlight>        
+      );
+    } else {
+      return (
+        <TouchableHighlight 
+          style={styles.rightUserNavButton}
           onPress={() => { navigator.push({
               title: 'Profile',
             })
@@ -93,6 +105,11 @@ class AppNavigator extends Component {
           <Profile
             navigator={navigator} />
         )
+    } else if (route.title === 'Chat') {
+      return (
+        <PusherChat
+          navigator={navigator} />
+      )
     }
   }
 
@@ -121,22 +138,30 @@ const styles = StyleSheet.create({
       marginTop:100
     },
     leftNavButton: {
-      marginLeft:13,
-      top:7
+      marginLeft:10,
+      top:10,
+      right: 7
     },
     rightNavButton: {
       marginRight:10,
-      top:7
+      top:8,
+      opacity: .5
+    },    
+    rightUserNavButton: {
+      marginRight:10,
+      top:11,
+      opacity: .5
     },
     brand: {
       fontSize: 30,
       fontFamily: 'helvetica neue',
       letterSpacing: 2,
-      color: '#F2EFE4'
+      color: '#7E8F7C',
+      top:4
     },
     nav: {
       height: 60,
-      backgroundColor: '#7E8F7C',
+      backgroundColor: '#DFE2DB',
     },
     button: {
       height:60,

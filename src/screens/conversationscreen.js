@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ListView, TouchableOpacity, TextInput, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, 
+    Button, ListView, TextInput, Dimensions } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { connect } from 'react-redux';
@@ -32,6 +33,9 @@ class ConversationScreen extends Component {
         const {dispatch, Chats} = this.props;
         const chats = Chats;
 
+            this.setState({
+                conversation: this.state.conversation.cloneWithRows(chats)
+            })
         this.setState({
             conversation: this.state.conversation.cloneWithRows(chats)
         })
@@ -89,11 +93,12 @@ class ConversationScreen extends Component {
         return (
             <View style={styles.container}>
               <View style={styles.row}>
-                <TouchableOpacity
+                <Button
+                  title='push'
                   style={styles.back_btn}
                   onPress={() => Actions.pop()}>
-                <Image source={require('../../assets/back.png')} style={styles.back_img}/>
-                </TouchableOpacity>
+                 <Image source={require('../../assets/back.png')} style={styles.back_img}/>
+                </Button>
               <View style={styles.innerRow}>
                <Image source={require('../../assets/cat.jpeg')} style={styles.dp}/>
                <Text style={styles.main_text}>CHAT</Text>
@@ -109,15 +114,16 @@ class ConversationScreen extends Component {
             <TextInput
             style={styles.textInput}
             onChangeText={(text) => this.setState({username:text})}
-            placeholder="Send has?"/>
+            placeholder="USERNAME"/>
             <TextInput
             style={styles.textInput}
             onChangeText={(text) => this.setState({text:text})}
             placeholder="Type a message"/>
-            <TouchableOpacity
-            onPress={this.sendMessage}>
+            <Button
+                title='push'
+                onPress={this.sendMessage}>
             <Image source={require('../../assets/back.png')} style={styles.msgAction}/>
-            </TouchableOpacity>
+            </Button>
             </View>
             <KeyboardSpacer/>
             </View>

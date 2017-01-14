@@ -33,9 +33,14 @@ class EventView extends Component {
             source={{uri: eventDetails.images[3].url}} /> 
         <Text style={styles.description}>{eventDetails.name}</Text>
         <View style={{flexDirection: 'row'}}> 
-          <Text> Meow </Text>
-          <Text> Meow </Text>
-          <Text> Meow </Text>
+          <View style={styles.need}>
+            <Image source={require('.././assets/need.png')}/>
+            <Text style={styles.buttontext}> Need</Text>
+          </View>
+          <View style={styles.trade}>
+            <Image  source={require('.././assets/trade.png')}/>
+          <Text style={styles.buttontext}>Trade</Text>
+          </View>
         </View>        
         <EventListings/>
 
@@ -47,7 +52,20 @@ class EventView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#7E8F7C'
+    backgroundColor: '#DFE2DB'
+  },
+  need: {
+    bottom: 15,
+    left: 50,
+  },
+  buttontext: {
+    color: '#505050', 
+    fontFamily:'helvetica', 
+    fontWeight: '400'
+  },
+  trade: {
+    bottom: 15,
+    left: 240
   },
   image: {
     width: 380,
@@ -69,11 +87,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontSize: 22,
     margin: 5,
-    color: '#FFF',
+    color: '#585858',
     textAlign: 'center',
     fontFamily: 'Helvetica',
-    fontWeight: '400',
-    bottom: 55,
+    fontWeight: 'bold',
   },
   forumbutton: {
     color: 'green',

@@ -5,7 +5,7 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
+  TouchableHighlight,
 } from 'react-native';
 import Userlistings from './userlist';
 import PusherChat from '.././src/pusherchat'
@@ -17,13 +17,35 @@ class Profile extends Component {
       <View style={styles.container}>
         <Image style={styles.userimage} source={require('.././assets/cat.jpeg')}/>
         <Text style={styles.username}>
-          Grumpy Cat
+          Grumpy Cat 
         </Text>
+        <View style={styles.features}>
+        <TouchableHighlight 
+          style={styles.leftbutton}>
+          <View>
+          <Image style={{opacity: 0.5}}source={require('.././assets/list.png')}/>
+          <Text style={styles.featurestext}> 0 posts </Text>
+        </View>
+        </TouchableHighlight>            
+        <TouchableHighlight
+          style={styles.centerbutton}>
+          <View>
+          <Image source={require('.././assets/tradeheart.png')}/>
+          <Text style={styles.featurestext}> 0 trades </Text>
+        </View>
+        </TouchableHighlight>            
+        <TouchableHighlight
+          style={styles.rightbutton}>
+          <View>
+          <Image source={require('.././assets/block.png')}/>
+        </View>
+        </TouchableHighlight>    
+        </View>
+
         <View style={styles.chat}>
           <Text style={styles.post}>
             RECENT POSTS
           </Text>
-          <PusherChat/>
         </View>
       </View>
     );
@@ -35,10 +57,28 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#7E8F7C',
+    backgroundColor: '#DFE2DB',
     top: 60
   },
-
+  features: {
+    flexDirection: 'row',
+    margin: 20
+  },
+  leftbutton: {
+    right: 60,
+    top: 5,
+  },
+  centerbutton: {
+    bottom: 14
+  },
+  featurestext: {
+    textAlign: 'center',
+    color: '#909090',
+    bottom: 0
+  },
+  rightbutton: {
+    left: 60
+  },
   chat: {
     flex: 2, 
     width: 400, 
@@ -51,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '400',
     textAlign: 'center',
-    color: '#fff',
+    color: '#585858',
     top: 10
   },
   userimage: {

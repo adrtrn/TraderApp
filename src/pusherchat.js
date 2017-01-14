@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "#95a5a6",
         padding: 0,
-        height: 45
+        height: 455
     },
     sceneStyle: {
         flex: 1,
         backgroundColor: "#fff",
         flexDirection: "column",
-        paddingTop:20
+        paddingTop:220
     }
 })
 

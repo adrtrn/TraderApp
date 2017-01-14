@@ -70,7 +70,7 @@ class Search extends Component {
 
     return (
       <View style={styles.container}>
-
+        <Image source={require('.././assets/sand.jpeg')} style={styles.backgroundImage} />
         <TextInput
           style={styles.searchInput}
           value={this.state.searchString}
@@ -99,9 +99,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F2EFE4',
-
   },
-  button: {
+  backgroundImage: {
+    resizeMode: 'cover', // or 'stretch'
+  },
+    button: {
     flexDirection: 'row',
     borderRadius: 7,
     padding: 5, 
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 150,
     left: 150,
-    bottom: 46,
+    bottom: 796,
     right: 3,
   },
   search: {
@@ -140,6 +142,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     color: '#48BBEC',
     textAlign: 'left',
+    bottom: 750
 
 }
 });

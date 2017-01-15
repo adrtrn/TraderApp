@@ -108,26 +108,24 @@ class ConversationScreen extends Component {
             </View>
 
             <ListView
-            renderRow={this.renderRow}
-            dataSource={this.state.conversation}/>
-
-            <View style={styles.input}>
-
-            <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({username:text})}
-            placeholder="USERNAME"/>
-            <TextInput
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({text:text})}
-            placeholder="Type a message"/>
-            <Button
-                title='push'
-                onPress={this.sendMessage}>
-            <Image source={require('../../assets/back.png')} style={styles.msgAction}/>
-            </Button>
-            </View>
-            <KeyboardSpacer/>
+                renderRow={this.renderRow}
+                dataSource={this.state.conversation}/>
+                <View style={styles.input}>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={(text) => this.setState({username:text})}
+                    placeholder="USERNAME"/>
+                    <TextInput
+                    style={styles.textInput}
+                    onChangeText={(text) => this.setState({text:text})}
+                    placeholder="Type a message"/>
+                    <Button
+                        title='push'
+                        onPress={this.sendMessage}>
+                        <Image source={require('../../assets/back.png')} style={styles.msgAction}/>
+                    </Button>
+                </View>
+                <KeyboardSpacer/>
             </View>
             )
     }
@@ -135,7 +133,8 @@ class ConversationScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#fff'
     },
     main_text: {
         fontSize: 16,

@@ -12,7 +12,7 @@ import Search from './search';
 import Result from './result';
 import EventView from './eventView';
 import Profile from './profile';
-import PusherChat from '.././src/pusherchat';
+import Chat from './chat';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
@@ -95,7 +95,7 @@ class AppNavigator extends Component {
         )
     } else if (route.title === 'Chat') {
       return (
-        <PusherChat
+        <Chat
           navigator={navigator} />
       )
     }

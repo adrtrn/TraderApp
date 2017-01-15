@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import Userlistings from './userlist';
-import PusherChat from '.././src/pusherchat'
+import Chat from './chat'
 
 
 class Profile extends Component {

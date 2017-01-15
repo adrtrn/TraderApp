@@ -21,3 +21,23 @@ app.listen(app.get('port'), function() {
 app.set('port', (process.env.PORT || 5000));
 
 
+app.route('/messages', methods=['POST'])
+def new_message():
+  username = request.form['username']
+  text = cgi.escape(request.form['text']) # let's escape it for security's sake
+  time = request.form['time']
+
+  # ENTER MAGIC HERE
+
+  return "great success!"
+
+app.route('/messages', methods=['POST'])
+def new_message():
+
+  ...
+
+  pusher.trigger('messages', 'new_message', {
+    'text': text,
+    'username': username,
+    'time': time
+  })  

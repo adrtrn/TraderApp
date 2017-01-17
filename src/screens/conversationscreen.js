@@ -8,7 +8,6 @@ import { apiSendChat, newMesage } from './../actions/';
 import moment from 'moment';
 
 const { width, height } = Dimensions.get('window');
-
 const username = 'DUMMY_USER';
 
 function mapStateToProps(state) {
@@ -96,33 +95,33 @@ class ConversationScreen extends Component {
             <View style={styles.container}>
               <View style={styles.row}>
                 <Button
-                  title='push'
+                  title='back'
                   style={styles.back_btn}
                   onPress={() => Actions.pop()}>
-                 <Image source={require('../../assets/back.png')} style={styles.back_img}/>
                 </Button>
-              <View style={styles.innerRow}>
-               <Image source={require('../../assets/cat.jpeg')} style={styles.dp}/>
-               <Text style={styles.main_text}>CHAT</Text>
+                <View style={styles.innerRow}>
+                  <Image source={require('../../assets/cat.jpeg')} style={styles.dp}/>
+                  <Text style={styles.main_text}>GROUP CHAT</Text>
+                </View>
               </View>
-            </View>
 
-            <ListView
+              <ListView
                 renderRow={this.renderRow}
-                dataSource={this.state.conversation}/>
-                <View style={styles.input}>
-                    <TextInput
-                    style={styles.textInput}
-                    onChangeText={(text) => this.setState({username:text})}
-                    placeholder="USERNAME"/>
-                    <TextInput
-                    style={styles.textInput}
-                    onChangeText={(text) => this.setState({text:text})}
-                    placeholder="Type a message"/>
+                dataSource={this.state.conversation}
+                renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}/>
+
+              <View style={styles.input}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(text) => this.setState({username:text})}
+                  placeholder="POST TITLE"/>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={(text) => this.setState({text:text})}
+                  placeholder="DESCRIPTION"/>
                     <Button
                         title='push'
                         onPress={this.sendMessage}>
-                        <Image source={require('../../assets/back.png')} style={styles.msgAction}/>
                     </Button>
                 </View>
                 <KeyboardSpacer/>
@@ -133,8 +132,7 @@ class ConversationScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff'
+        flex: 1
     },
     main_text: {
         fontSize: 16,
@@ -148,7 +146,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: "#42C0FB",
         marginBottom: 10,
-        padding:5
+        padding:5,
+        top: 60
     },
     back_img: {
         marginTop: 8,
@@ -228,4 +227,5 @@ const styles = StyleSheet.create({
         marginTop:13
     }
 });
+
 export default connect(mapStateToProps)(ConversationScreen)

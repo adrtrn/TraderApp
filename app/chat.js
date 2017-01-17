@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions, View} from 'react-native';
 import { Provider } from 'react-redux'
-import configureStore from '.././src/store/configureStore'
 import WelcomeView from './welcomeView'
 import MainView from './mainView'
 
-
-
-
+import configureStore from '.././src/store/configureStore'
 const store = configureStore();
 
 import ConversationScreen from '.././src/screens/conversationscreen';
 
-
 class Chat extends Component {
-
-  getInitialState() {
-    
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: 'Grumpy Cat'
+    }
   }
-  
+
   _onName(e) {
     if (e.nativeEvent.keyCode != 13) return;
     var username = e.target.value;
@@ -27,10 +25,9 @@ class Chat extends Component {
 
   render() {
     return (
-        <View style={styles.container}>
-        <WelcomeView username={this.state.username} _onName={this._onName}/>
-        <MainView username={this.state.username}/>
-        </View>
+            <Provider store={store}>
+            <ConversationScreen />
+                </Provider>
     )
   }
 }

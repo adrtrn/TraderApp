@@ -4,16 +4,28 @@ import {
   StyleSheet,
   Text,
   View,
+  TextInput,
   Image,
   TouchableHighlight,
 } from 'react-native';
+import Pusher from 'pusher-js/react-native';
+
+var pusher = new Pusher('4adf85492acfebaad8bb', {
+  encrypted: true
+});
+
+var channel = pusher.subscribe('my-channel');
+channel.bind('my-event', function(data) {
+  alert(data.message);
+});
+
 
 class MainView extends Component {
-
-  getInitialState() {
-    return {
-      messages: [] 
-    };
+  constructor(props) {
+    super(props)
+    this.state = {
+      messages: 'useless placeholder'
+    }
   }
 
   componentWillMount() {
@@ -47,13 +59,58 @@ class MainView extends Component {
       input.value = ""
     });
   }
-  render() {
-    if (!this.props.username) var style = {display:'none'}
 
-    return (
-      <View>
-        <input placeholder="Type your message" onKeyPress={this._onMessage} />
-      </View>
-    );
+  render() {
+      return (
+        <View style={styles.container}>
+          <TextInput 
+            style={styles.messageInput}
+            placeholder="Type your message"
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.messages}
+            />
+          <TouchableHighlight
+            style={styles.button}
+            underlayColor="transparent"
+            onPress={this.props.onName}>
+            <Text>SEND</Text>
+          </TouchableHighlight>    
+        </View>
+      );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: "#f9f9f9",
+    top:40
+   },
+   button: {
+    top:100
+   },
+   description: {
+    top: 110,
+    right: 135
+   },
+   header: {
+    top: 100
+   },
+  messageInput: {
+    color: '#fff',
+    height: 40,
+    margin: 10,
+    padding: 4,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#909090',
+    borderRadius: 6,
+    color: '#48BBEC',
+    textAlign: 'left',
+    top: 100
+  }
+})
+
+export default MainView;

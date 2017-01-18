@@ -9,6 +9,10 @@ const pusher = new Pusher({
   encrypted: true
 });
 
+pusher.trigger('chat-channel', 'new-message', {
+  "message": "hello world"
+});
+
 app.get('/chat/:chat', function(req,res){
   const chat_data = JSON.parse(req.params.chat);
   pusher.trigger('chat_channel', 'new-message', {chat:chat_data});
@@ -20,24 +24,21 @@ app.listen(app.get('port'), function() {
 
 app.set('port', (process.env.PORT || 5000));
 
+// app.route('/messages', methods=['POST'])
 
-app.route('/messages', methods=['POST'])
-def new_message():
-  username = request.form['username']
-  text = cgi.escape(request.form['text']) # let's escape it for security's sake
-  time = request.form['time']
+// def new_message():
+//   username = request.form['username']
+//   text = cgi.escape(request.form['text']) 
+//   time = request.form['time']
 
-  # ENTER MAGIC HERE
+//   return "great success!"
 
-  return "great success!"
+// app.route('/messages', methods=['POST'])
+// def new_message():
 
-app.route('/messages', methods=['POST'])
-def new_message():
 
-  ...
-
-  pusher.trigger('messages', 'new_message', {
-    'text': text,
-    'username': username,
-    'time': time
-  })  
+//   pusher.trigger('messages', 'new_message', {
+//     'text': text,
+//     'username': username,
+//     'time': time
+//   })  

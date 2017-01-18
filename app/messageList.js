@@ -11,6 +11,9 @@ import {
 class MessageList extends Component {
   render(){
     var list = this.props.messages.map(function(message){
+      return message;
+    }
+      
       return (
         <View>
           <Text>{message.username} - {message.time}</Text>

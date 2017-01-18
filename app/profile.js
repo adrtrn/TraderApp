@@ -35,7 +35,11 @@ class Profile extends Component {
         </View>
         </TouchableHighlight>            
         <TouchableHighlight
-          style={styles.rightbutton}>
+          style={styles.rightbutton}
+          onPress={() => { navigator.push({
+              title: 'Map',
+            })
+          }}>
           <View>
           <Image source={require('.././assets/block.png')}/>
         </View>

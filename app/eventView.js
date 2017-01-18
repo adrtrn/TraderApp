@@ -8,7 +8,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-import Login from './fblogin';
+import Login from './loginForm';
 import EventListings from './eventlistings';
 
 

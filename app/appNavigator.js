@@ -13,12 +13,24 @@ import Result from './result';
 import EventView from './eventView';
 import Profile from './profile';
 import Chat from './chat';
+import LiteMapView from './mapView';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
     if (route.title === 'Search') {
-      return null;
-    } else if (route.title === 'Profile'){
+      return (
+        <TouchableHighlight 
+        style={styles.leftNavButton}
+          onPress={() => navigator.push({
+              title: 'Map'
+            })
+          }>
+          <View>
+          <Image source={require('.././assets/map.png')}/>
+        </View>
+        </TouchableHighlight>
+    )
+    } else if (route.title === 'Profile') {
       return (
         <TouchableHighlight 
         style={styles.leftNavButton}
@@ -96,6 +108,11 @@ class AppNavigator extends Component {
     } else if (route.title === 'Chat') {
       return (
         <Chat
+          navigator={navigator} />
+      )    
+    } else if (route.title === 'Map') {
+      return (
+        <LiteMapView
           navigator={navigator} />
       )
     }

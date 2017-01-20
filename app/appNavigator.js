@@ -14,11 +14,14 @@ import EventView from './eventView';
 import Profile from './profile';
 import Chat from './chat';
 import LiteMapView from './mapView';
+import EventListings from './eventlistings';
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
     if (route.title === 'Search') {
-      return (
+      return null;
+    } else if (route.title === 'Event') {
+        return (
         <TouchableHighlight 
         style={styles.leftNavButton}
           onPress={() => navigator.push({
@@ -26,21 +29,44 @@ var NavigationBarRouteMapper = {
             })
           }>
           <View>
-          <Image source={require('.././assets/map.png')}/>
+          <Image style={{left: 10}} source={require('.././assets/map.png')}/>
         </View>
         </TouchableHighlight>
-    )
-    } else if (route.title === 'Profile') {
+    )} else if (route.title === 'Profile') {
       return (
         <TouchableHighlight 
-        style={styles.leftNavButton}
-          onPress={() => navigator.push({
-              title: 'Search'
-            })
-          }>
-          <View>
-          <Image source={require('.././assets/back.png')}/>
-        </View>
+          style={styles.leftNavButton}
+            onPress={() => navigator.push({
+                title: 'Search'
+              })
+            }>
+            <View>
+            <Image source={require('.././assets/back.png')}/>
+          </View>
+        </TouchableHighlight>    
+    )} else if (route.title === 'Map') {
+      return (
+        <TouchableHighlight 
+          style={styles.leftNavButton}
+            onPress={() => navigator.push({
+                title: 'EventListings'
+              })
+            }>
+            <View>
+            <Image source={require('.././assets/eventlisting.png')}/>
+          </View>
+        </TouchableHighlight>
+    )} else if (route.title === 'EventListings') {
+      return (
+        <TouchableHighlight 
+          style={styles.leftNavButton}
+            onPress={() => navigator.push({
+                title: 'Map'
+              })
+            }>
+            <View>
+            <Image source={require('.././assets/back.png')}/>
+          </View>
         </TouchableHighlight>
     )} 
   },
@@ -81,6 +107,7 @@ var NavigationBarRouteMapper = {
   },
 }
 
+
 class AppNavigator extends Component {
   renderScene(route, navigator) {
     if (route.title === 'Search') {
@@ -99,7 +126,13 @@ class AppNavigator extends Component {
           <EventView
             navigator={navigator} 
             eventdata = {route.event} />        
-        )
+        )    
+    } else if (route.title === 'EventListings') {
+      return (
+        <EventListings
+          navigator={navigator} 
+          eventdata = {route.event} />        
+      )
     } else if (route.title === 'Profile') {
         return (
           <Profile

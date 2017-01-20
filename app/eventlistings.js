@@ -1,29 +1,42 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, RefreshControl, ActivityIndicator, ListView, Linking, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, RefreshControl, ActivityIndicator, ListView, Linking, TouchableOpacity} from 'react-native';
 
 
-var sampledata = ['HAVE: ITEM #5','NEED: ITEM #31','NEED: ITEM #52','HAVE: ITEM #32','HAVE: ITEM #45','NEED: ITEM #15','NEED: ITEM #12','NEED: ITEM #22','HAVE: ITEM #31','HAVE: ITEM #14','NEED: ITEM #55',]
+var meow = ['item: 1','item: 2','item: 3','item: 4','item: 5','item: 6',]
 
 
 class EventListings extends Component {
-
-
   constructor(props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 != r2})
     this.state = {
-      userposts: ds.cloneWithRows(sampledata)
+      eventlisting: ds.cloneWithRows(meow),
+      searchText: ''
     }
+  }
+  setSearchText(event) {
+    const searchText = event.nativeEvent.text;
+    let postLength = this.state.meow.length;
+
+    this.setState({
+      searchText,
+      eventlisting: this.state.dataSource.cloneWithRows(filteredPost)
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}> RECENT POSTS </Text>
+        <TextInput
+          style={styles.searchBar}
+          placeholder="  Search..."
+          onChangeText={(text) => console.log('searching for ', text)}
+        />      
         <ListView
           style={styles.list}
-          dataSource={this.state.userposts}
+          dataSource={this.state.eventlisting}
           renderRow={(result) => { return this.renderResult(result) }} 
+          renderHeader={() => {Header}}
           renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}/>
       </View>
     );
@@ -40,6 +53,16 @@ class EventListings extends Component {
     )
   }  
 }
+
+const Header = (props) => (
+  <View style={styles.container}>
+    <TextInput
+      style={styles.input}
+      placeholder="Search..."
+      onChangeText={(text) => console.log('searching for ', text)}
+    />
+  </View>
+);
 
 const styles = StyleSheet.create({
   rowContainer: {
@@ -91,7 +114,13 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 17,
     marginLeft: 30
-  },  
+  }, 
+  searchBar: {
+    fontSize: 18,
+    height: 10,
+    flex: .2,
+    borderWidth: 1,
+  },
 });
 
 export default EventListings;

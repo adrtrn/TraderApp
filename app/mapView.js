@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -7,43 +7,69 @@ import {
   ScrollView,
 } from 'react-native';
 import MapView from 'react-native-maps';
+import PriceMarker from './PriceMarker';
 
 const { width, height } = Dimensions.get('window');
 
+
 const ASPECT_RATIO = width / height;
-const LATITUDE = 23.78825;
-const LONGITUDE = -117.4324;
+const LATITUDE = 37.78825;
+const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const SPACE = 0.01;
 
-class LiteMapView extends Component {
+class LiteMapView extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
+      a: {
+        latitude: LATITUDE + SPACE,
+        longitude: LONGITUDE + SPACE,
+      },
+      b: {
+        latitude: LATITUDE - SPACE,
+        longitude: LONGITUDE - SPACE,
       },
     };
   }
 
+
   render() {
     return (
       <View style={styles.container}>
-          <MapView
-            style={styles.map}
-            scrollEnabled={false}
-            zoomEnabled={false}
-            pitchEnabled={false}
-            rotateEnabled={false}
-            initialRegion={this.state.region}
+        <MapView
+          provider={this.props.provider}
+          style={styles.map}
+          initialRegion={{
+            latitude: LATITUDE,
+            longitude: LONGITUDE,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}
+        >
+          <MapView.Marker
+            coordinate={this.state.a}
+            onSelect={(e) => log('onSelect', e)}
+            onDrag={(e) => log('onDrag', e)}
+            onDragStart={(e) => log('onDragStart', e)}
+            onDragEnd={(e) => log('onDragEnd', e)}
+            onPress={(e) => log('onPress', e)}
+            draggable
           >
-
-          </MapView>
-
+            <PriceMarker amount={99} />
+          </MapView.Marker>
+          <MapView.Marker
+            coordinate={this.state.b}
+            onSelect={(e) => log('onSelect', e)}
+            onDrag={(e) => log('onDrag', e)}
+            onDragStart={(e) => log('onDragStart', e)}
+            onDragEnd={(e) => log('onDragEnd', e)}
+            onPress={(e) => log('onPress', e)}
+            draggable
+          />
+        </MapView>
       </View>
     );
   }
@@ -55,20 +81,17 @@ LiteMapView.propTypes = {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
+  scrollview: {
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
   map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    width: 375,
+    height: 350,
   },
 });
 

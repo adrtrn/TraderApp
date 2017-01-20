@@ -35,21 +35,20 @@ class EventView extends Component {
         <View style={{flexDirection: 'row'}}> 
           <TouchableOpacity
             style={styles.addpost}>
-             <Image
-            style={styles.search}
-            source={require('.././assets/add.png')}
-          />            
-          <Text style={styles.buttontext}> CREATE </Text>
-
+            <Image
+              style={styles.createicon}
+              source={require('.././assets/add.png')}
+            />            
           </TouchableOpacity>
+          <Text style={styles.buttontext}> CREATE </Text>
           <TouchableOpacity
             style={styles.listall}>
              <Image
             style={styles.search}
             source={require('.././assets/listall.png')}
           />                     
-          <Text style={styles.buttontext}> VIEW ALL </Text>
           </TouchableOpacity>
+          <Text style={styles.showtext}> SHOW ALL </Text>
         </View>        
         <EventListings/>
 
@@ -67,8 +66,14 @@ const styles = StyleSheet.create({
     bottom: 15,
     left: 50,
   },
+  createicon: {
+    top: 10,
+    left: 3,
+    opacity: .6
+  },
   buttontext: {
     textAlign: 'center',
+    top: 10,
     right: 7,
     color: '#686868', 
     fontFamily:'helvetica', 
@@ -80,7 +85,8 @@ const styles = StyleSheet.create({
   },
   listall: {
     top: 2,
-    left: 200
+    left: 200,
+    margin: 10
   },
   addpost: {
     top: 3,
@@ -110,6 +116,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Helvetica',
     fontWeight: 'bold',
+  },
+  showtext: {
+    left: 70,
+    top: 10,
+    color: '#686868', 
+    fontFamily:'helvetica', 
+    fontWeight: '400'  
   },
   forumbutton: {
     color: 'green',

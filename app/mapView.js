@@ -7,53 +7,69 @@ import {
   ScrollView,
 } from 'react-native';
 import MapView from 'react-native-maps';
+import PriceMarker from './PriceMarker';
 
 const { width, height } = Dimensions.get('window');
+
 
 const ASPECT_RATIO = width / height;
 const LATITUDE = 37.78825;
 const LONGITUDE = -122.4324;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const SPACE = 0.01;
 
 class LiteMapView extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
+      a: {
+        latitude: LATITUDE + SPACE,
+        longitude: LONGITUDE + SPACE,
+      },
+      b: {
+        latitude: LATITUDE - SPACE,
+        longitude: LONGITUDE - SPACE,
       },
     };
   }
 
+
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={StyleSheet.absoluteFill}
-          contentContainerStyle={styles.scrollview}
+        <MapView
+          provider={this.props.provider}
+          style={styles.map}
+          initialRegion={{
+            latitude: LATITUDE,
+            longitude: LONGITUDE,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}
         >
-          <MapView
-            provider={this.props.provider}
-            style={styles.map}
-            scrollEnabled={false}
-            zoomEnabled={true}
-            pitchEnabled={false}
-            rotateEnabled={false}
-            initialRegion={this.state.region}
+          <MapView.Marker
+            coordinate={this.state.a}
+            onSelect={(e) => log('onSelect', e)}
+            onDrag={(e) => log('onDrag', e)}
+            onDragStart={(e) => log('onDragStart', e)}
+            onDragEnd={(e) => log('onDragEnd', e)}
+            onPress={(e) => log('onPress', e)}
+            draggable
           >
-            <MapView.Marker
-              title="This is a title"
-              description="This is a description"
-              coordinate={this.state.region}
-            />
-          </MapView>
-
-        </ScrollView>
+            <PriceMarker amount={99} />
+          </MapView.Marker>
+          <MapView.Marker
+            coordinate={this.state.b}
+            onSelect={(e) => log('onSelect', e)}
+            onDrag={(e) => log('onDrag', e)}
+            onDragStart={(e) => log('onDragStart', e)}
+            onDragEnd={(e) => log('onDragEnd', e)}
+            onPress={(e) => log('onPress', e)}
+            draggable
+          />
+        </MapView>
       </View>
     );
   }

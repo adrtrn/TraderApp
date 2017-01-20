@@ -42,6 +42,8 @@ class LiteMapView extends React.Component {
         <MapView
           provider={this.props.provider}
           style={styles.map}
+          region={this.state.region}
+          onRegionChange={this.onRegionChange}
           initialRegion={{
             latitude: LATITUDE,
             longitude: LONGITUDE,
@@ -49,7 +51,11 @@ class LiteMapView extends React.Component {
             longitudeDelta: LONGITUDE_DELTA,
           }}
         >
+        {this.state.markers.map(marker => (
           <MapView.Marker
+            coordinate={marker.latlng}
+            title={marker.title}
+            description={marker.description}
             coordinate={this.state.a}
             onSelect={(e) => log('onSelect', e)}
             onDrag={(e) => log('onDrag', e)}

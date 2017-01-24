@@ -2,7 +2,6 @@ package com.traderapp;
 
 import com.facebook.react.ReactActivity;
 import com.airbnb.android.react.maps.MapsPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 public class MainActivity extends ReactActivity {
 

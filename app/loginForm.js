@@ -20,6 +20,24 @@ class Login extends Component {
       username: null
     }
   }
+  initUser(token) {
+    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
+    .then((response) => response.json())
+    .then((json) => {
+      // Some user object has been set up somewhere, build that user here
+      user.name = json.name
+      user.id = json.id
+      user.user_friends = json.friends
+      user.email = json.email
+      user.username = json.name
+      user.loading = false
+      user.loggedIn = true
+      user.avatar = setAvatar(json.id)      
+    })
+    .catch(() => {
+      reject('ERROR GETTING DATA FROM FACEBOOK')
+    })
+  }
 
   _onName(e) {
     if (e.nativeEvent.keyCode != 13) return;
@@ -29,7 +47,7 @@ class Login extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <LoginButton
           publishPermissions={["publish_actions"]}
           onLoginFinished={
@@ -56,7 +74,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#95a5a6",
    },
    tabBarStyle: {
     flex: 1,

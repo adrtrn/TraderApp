@@ -65,16 +65,56 @@ var NavigationBarRouteMapper = {
               })
             }>
             <View>
-            <Image source={require('.././assets/back.png')}/>
+            <Image source={require('.././assets/map.png')}/>
           </View>
         </TouchableHighlight>
     )} 
   },
   Title(route, navigator, index, navState) {
-      return (
-          <Text style={styles.brand}>TRADER</Text>
+    if (route.title === 'Event') {
+      return (        
+        <TouchableHighlight 
+          style={styles.leftNavButton}
+            onPress={() => navigator.push({
+                title: 'Search'
+              })
+            }>
+          <View>
+            <Text style={styles.brandLink}>TRADER</Text>
+          </View>
+        </TouchableHighlight>
       );
-    
+    } else if (route.title === 'Map') {
+      return (        
+        <TouchableHighlight 
+          style={styles.leftNavButton}
+            onPress={() => navigator.push({
+                title: 'Search'
+              })
+            }>
+          <View>
+            <Text style={styles.brandLink}>TRADER</Text>
+          </View>
+        </TouchableHighlight>
+      );
+    } else if (route.title === 'Profile') {
+      return (        
+        <TouchableHighlight 
+          style={styles.leftNavButton}
+            onPress={() => navigator.push({
+                title: 'Search'
+              })
+            }>
+          <View>
+            <Text style={styles.brandLink}>TRADER</Text>
+          </View>
+        </TouchableHighlight>
+      );
+    } else {
+      return (
+            <Text style={styles.brand}>TRADER</Text>        
+      )
+    }
   },
   RightButton(route, navigator, index, navState) {
     if (route.title === 'Profile') {
@@ -128,10 +168,10 @@ class AppNavigator extends Component {
             eventdata = {route.event} />        
         )    
     } else if (route.title === 'EventListings') {
-      return (
-        <EventListings
-          navigator={navigator} 
-          eventdata = {route.event} />        
+        return (
+          <EventListings
+            navigator={navigator} 
+            eventdata = {route.event} />        
       )
     } else if (route.title === 'Profile') {
         return (
@@ -139,14 +179,14 @@ class AppNavigator extends Component {
             navigator={navigator} />
         )
     } else if (route.title === 'Chat') {
-      return (
-        <Chat
-          navigator={navigator} />
+        return (
+          <Chat
+            navigator={navigator} />
       )    
     } else if (route.title === 'Map') {
-      return (
-        <LiteMapView
-          navigator={navigator} />
+        return (
+          <LiteMapView
+            navigator={navigator} />
       )
     }
   }
@@ -195,7 +235,15 @@ const styles = StyleSheet.create({
       fontFamily: 'helvetica neue',
       letterSpacing: 2,
       color: '#7E8F7C',
-      top:4
+      backgroundColor: 'transparent',
+      top: 5
+    },    
+    brandLink: {
+      fontSize: 30,
+      fontFamily: 'helvetica neue',
+      letterSpacing: 2,
+      color: '#7E8F7C',
+      bottom: 4
     },
     nav: {
       height: 60,

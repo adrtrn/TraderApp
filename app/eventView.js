@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     textAlign: 'center',
-    top: 10,
-    right: 7,
+    top: 15,
+    right: 3,
     color: '#686868', 
     fontFamily:'helvetica', 
     fontWeight: '400'

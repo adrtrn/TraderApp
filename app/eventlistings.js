@@ -58,7 +58,7 @@ const Header = (props) => (
   <View style={styles.container}>
     <TextInput
       style={styles.input}
-      placeholder="Search..."
+      placeholder="Search: (e.g: water, food, drinks)"
       onChangeText={(text) => console.log('searching for ', text)}
     />
   </View>
@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
   }, 
   searchBar: {
     fontSize: 18,
-    height: 10,
-    flex: .2,
+    height: 7,
+    flex: .1,
     borderWidth: 1,
   },
 });

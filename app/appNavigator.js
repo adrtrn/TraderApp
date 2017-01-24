@@ -97,19 +97,6 @@ var NavigationBarRouteMapper = {
           </View>
         </TouchableHighlight>
       );
-    } else if (route.title === 'Profile') {
-      return (        
-        <TouchableHighlight 
-          style={styles.leftNavButton}
-            onPress={() => navigator.push({
-                title: 'Search'
-              })
-            }>
-          <View>
-            <Text style={styles.brandLink}>TRADER</Text>
-          </View>
-        </TouchableHighlight>
-      );
     } else {
       return (
             <Text style={styles.brand}>TRADER</Text>        

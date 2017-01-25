@@ -198,7 +198,7 @@ class AppNavigator extends Component {
 
 const styles = StyleSheet.create({
   mainContainer: {
-      flex: 4,
+      flex: 1,
       flexDirection: 'column',
       marginTop:100
     },

@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',  
-    bottom: 50
+    bottom: 50,
   },  
   header:{
     textAlign: 'center',
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     color: '#303030'
   },
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#F2EFE4'
   },
   list: {

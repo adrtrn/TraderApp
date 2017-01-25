@@ -15,17 +15,18 @@ import EventListings from './eventlistings';
 class EventView extends Component {
 
   render() {
-  var eventDetails = this.props.eventdata
-  var today = new Date();
+  let eventDetails = this.props.eventdata
 
 
-  /* LOGIC GOES HERE FOR LINK TO FORUM IF THE EVENT DATE IS CURRENT */
+  /* /////// LOGIC GOES HERE FOR LINK TO FORUM IF THE EVENT DATE IS CURRENT 
+  let today = new Date();
 
-  /*if (eventDetails.dates.start === today) {
+  if (eventDetails.dates.start === today) {
     return button;
   } else {
     return "The event hasn't started or is already over.";
   }
+
   */
     return (
       <View style={styles.container}>

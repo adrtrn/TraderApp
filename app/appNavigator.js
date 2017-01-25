@@ -11,7 +11,7 @@ import {
 import Search from './search';
 import Result from './result';
 import EventView from './eventView';
-import Profile from './profile';
+import UserProfile from './userProfile';
 import Chat from './chat';
 import LiteMapView from './mapView';
 import EventListings from './eventlistings';
@@ -32,7 +32,7 @@ var NavigationBarRouteMapper = {
           <Image style={{left: 10}} source={require('.././assets/map.png')}/>
         </View>
         </TouchableHighlight>
-    )} else if (route.title === 'Profile') {
+    )} else if (route.title === 'UserProfile') {
       return (
         <TouchableHighlight 
           style={styles.leftNavButton}
@@ -104,7 +104,7 @@ var NavigationBarRouteMapper = {
     }
   },
   RightButton(route, navigator, index, navState) {
-    if (route.title === 'Profile') {
+    if (route.title === 'UserProfile') {
       return (
         <TouchableHighlight 
           style={styles.rightNavButton}
@@ -122,7 +122,7 @@ var NavigationBarRouteMapper = {
         <TouchableHighlight 
           style={styles.rightUserNavButton}
           onPress={() => { navigator.push({
-              title: 'Profile',
+              title: 'UserProfile',
             })
           }}>
           <View>
@@ -160,9 +160,9 @@ class AppNavigator extends Component {
             navigator={navigator} 
             eventdata = {route.event} />        
       )
-    } else if (route.title === 'Profile') {
+    } else if (route.title === 'UserProfile') {
         return (
-          <Profile
+          <UserProfile
             navigator={navigator} />
         )
     } else if (route.title === 'Chat') {
@@ -198,7 +198,7 @@ class AppNavigator extends Component {
 
 const styles = StyleSheet.create({
   mainContainer: {
-      flex: 4,
+      flex: 1,
       flexDirection: 'column',
       marginTop:100
     },
